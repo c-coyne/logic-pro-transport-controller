@@ -14,6 +14,26 @@ Micro::~Micro() {
 
 void Micro::checkFootswitch() {
     int id = footSwitch.checkSwitches();
+    if ((id != 4) && (id != currentSwitch)) {
+        currentSwitch = id;
+        switch(currentSwitch) {
+            case 0:
+                ledController.setLEDColor(SWITCH0_COLOR);
+                break;
+            case 1:
+                ledController.setLEDColor(SWITCH1_COLOR);
+                break;
+            case 2:
+                ledController.setLEDColor(SWITCH2_COLOR);
+                break;
+            case 3:
+                ledController.setLEDColor(SWITCH3_COLOR);
+                break;
+            default:
+                ledController.setLEDColor(CRGB::White);
+                break;
+        }
+    }
     Serial.print("ID detected is: ");
     Serial.println(id);
 }
