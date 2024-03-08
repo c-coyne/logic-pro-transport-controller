@@ -5,7 +5,8 @@
 #include <Arduino.h>
 
 Micro::Micro(int switchPins[4]) : footSwitch(switchPins) {
-    currentSwitch = 4;
+    currentSwitch = SwitchID::SWITCH_INIT;
+    currentState = State::STATE_INIT;
 }
 
 Micro::~Micro() {
@@ -14,19 +15,19 @@ Micro::~Micro() {
 
 void Micro::checkFootswitch() {
     int id = footSwitch.checkSwitches();
-    if ((id != 4) && (id != currentSwitch)) {
+    if ((id != SWITCH_NONE) && (id != currentSwitch)) {
         currentSwitch = id;
         switch(currentSwitch) {
-            case 0:
+            case SWITCH_0:
                 ledController.setLEDColor(SWITCH0_COLOR);
                 break;
-            case 1:
+            case SWITCH_1:
                 ledController.setLEDColor(SWITCH1_COLOR);
                 break;
-            case 2:
+            case SWITCH_2:
                 ledController.setLEDColor(SWITCH2_COLOR);
                 break;
-            case 3:
+            case SWITCH_3:
                 ledController.setLEDColor(SWITCH3_COLOR);
                 break;
             default:

@@ -9,6 +9,7 @@ class Micro {
         Footswitch footSwitch;
         LEDController ledController;
         int currentSwitch;
+        State currentState;
     public:
         Micro(int switchPins[4]);
         ~Micro();

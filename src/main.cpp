@@ -1,10 +1,11 @@
 #include <Arduino.h>
 #include "Micro.h"
+#include "Cfg_Types.h"
 
 /****************************************************
  *  Local variables                                 *
  ****************************************************/
-int switchPins[] = {2, 3, 4, 5};
+int switchPins[] = {SWITCH0_PIN, SWITCH1_PIN, SWITCH2_PIN, SWITCH3_PIN};
 Micro micro(switchPins);
 
 /****************************************************

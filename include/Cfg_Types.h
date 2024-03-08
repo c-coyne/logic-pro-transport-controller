@@ -16,5 +16,27 @@
 #define SWITCH2_COLOR       CRGB::Yellow
 #define SWITCH3_COLOR       CRGB::Red
 
+#define SWITCH0_PIN         2
+#define SWITCH1_PIN         3
+#define SWITCH2_PIN         4
+#define SWITCH3_PIN         5
+
+enum State {
+    STATE_INIT,
+    STATE_START,
+    STATE_PLAY,
+    STATE_STOP,
+    STATE_RECORD,
+    STATE_ERR
+};
+
+enum SwitchID {
+    SWITCH_INIT,
+    SWITCH_0,
+    SWITCH_1,
+    SWITCH_2,
+    SWITCH_3,
+    SWITCH_NONE
+};
 
 #endif // CFG_TYPES_H

@@ -2,6 +2,7 @@
  *  Include files                                   *
  ****************************************************/
 #include "Footswitch.h"
+#include "Cfg_Types.h"
 #include <Arduino.h>
 
 Footswitch::Footswitch(int switchPins[4])
@@ -19,9 +20,9 @@ Footswitch::~Footswitch() {
 }
 
 int Footswitch::checkSwitches() {
-    if (switch1.isPressed()) {return 0;}
-    if (switch2.isPressed()) {return 1;}
-    if (switch3.isPressed()) {return 2;}
-    if (switch4.isPressed()) {return 3;}
-    return 4;
+    if (switch1.isPressed()) {return SWITCH_0;}
+    if (switch2.isPressed()) {return SWITCH_1;}
+    if (switch3.isPressed()) {return SWITCH_2;}
+    if (switch4.isPressed()) {return SWITCH_3;}
+    return SWITCH_NONE;
 }
