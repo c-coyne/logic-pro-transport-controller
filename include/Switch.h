@@ -2,9 +2,13 @@
 #define SWITCH_H
 
 class Switch {
+    private:
+        int id;
+        int pin;
     public:
-        Switch();
+        Switch(int idValue, int pinValue);
         ~Switch();
+        bool isPressed();
 };
 
 #endif // SWITCH_H

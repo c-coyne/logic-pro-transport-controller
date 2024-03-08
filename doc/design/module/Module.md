@@ -3,20 +3,25 @@
 ```mermaid
 classDiagram
     Footswitch o-- Switch
-    Footswitch --> Micro
+    Micro --> Footswitch
     Micro --> LEDController
     class Switch{
-        -bool state
-        +getState()
+        -int id
+        -int pin
+        +bool isPressed()
     }
     class Footswitch{
         -Switch switch1
         -Switch switch2
         -Switch switch3
         -Switch switch4
+        +int checkSwitches()
     }
     class Micro{
-        +readGPIO()
+        -Footswitch footswitch
+        -LEDController ledController
+        -int currentSwitch
+        +int checkFootswitch()
     }
     class LEDController{
 
