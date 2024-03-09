@@ -13,6 +13,7 @@ Micro micro(switchPins);
  ****************************************************/
 void setup() {
   delay(3000); // power-up safety delay
+  micro.microInit();
   Serial.begin(9600);
   Serial.println("Program is running...");
 }
@@ -22,5 +23,4 @@ void setup() {
  ****************************************************/
 void loop() {
   micro.checkFootswitch();
-  delay(2000);
 }

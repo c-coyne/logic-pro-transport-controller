@@ -13,6 +13,64 @@ Micro::~Micro() {
     // deallocate resources if any
 }
 
+void Micro::fade(int duration, int times) {
+    
+    // Set up interval and initial color component
+    float interval = 255. / (2 * duration);
+    float component = 0;
+
+    // Gradually fade the LED up and down {times} times
+    for (int i=0; i<times; i++) {
+
+        // Fade up
+        for (int j=0; j<(duration/2); j++) {
+            
+            // Set the LED color
+            CRGB color = CRGB((uint8_t)component, (uint8_t)component, (uint8_t)component);
+            ledController.setLEDColor(color);
+
+            // Increment the color component
+            component += interval;
+
+            delay(1);
+        }
+
+        // Fade down
+        for (int j=0; j<(duration/2); j++) {
+            
+            // Set the LED color
+            CRGB color = CRGB((uint8_t)component, (uint8_t)component, (uint8_t)component);
+            ledController.setLEDColor(color);
+
+            // Decrement the color component
+            component -= interval;
+
+            delay(1);
+        }
+    }
+
+    // Fade back up to move into the actual program
+        for (int j=0; j<(duration/2); j++) {
+            
+            // Set the LED color
+            CRGB color = CRGB((uint8_t)component, (uint8_t)component, (uint8_t)component);
+            ledController.setLEDColor(color);
+
+            // Increment the color component
+            component += interval;
+
+            delay(1);
+        }
+
+}
+
+void Micro::microInit() {
+
+    // Fade LED strip up and down three times
+    fade(400, 2);
+
+}
+
 void Micro::checkFootswitch() {
     int id = footSwitch.checkSwitches();
     if ((id != SWITCH_NONE) && (id != currentSwitch)) {
@@ -35,6 +93,4 @@ void Micro::checkFootswitch() {
                 break;
         }
     }
-    Serial.print("ID detected is: ");
-    Serial.println(id);
 }
