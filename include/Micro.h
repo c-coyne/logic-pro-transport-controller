@@ -10,7 +10,7 @@ class Micro {
         LEDController ledController;
         int currentSwitch;
         State currentState;
-        void fade(int duration, int times);
+        void fade(int duration, int count, bool increasing, bool endBright);
     public:
         Micro(int switchPins[4]);
         ~Micro();

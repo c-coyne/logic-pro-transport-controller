@@ -13,61 +13,53 @@ Micro::~Micro() {
     // deallocate resources if any
 }
 
-void Micro::fade(int duration, int times) {
+void Micro::fade(int duration, int n, bool increasing, bool endBright) {
     
-    // Set up interval and initial color component
-    float interval = 255. / (2 * duration);
-    float component = 0;
+    // Set up interval and initial color component, initialize fade count
+    float interval = float(BRIGHTNESS) / (duration / 2.);
+    float brightness = (increasing) ? 0. : float(BRIGHTNESS);
+    int count = 0;
 
-    // Gradually fade the LED up and down {times} times
-    for (int i=0; i<times; i++) {
+    // Gradually fade the LED up and down {n} times
+    while (count < n) {
 
-        // Fade up
-        for (int j=0; j<(duration/2); j++) {
-            
-            // Set the LED color
-            CRGB color = CRGB((uint8_t)component, (uint8_t)component, (uint8_t)component);
-            ledController.setLEDColor(color);
+        ledController.setBrightness(brightness);
 
-            // Increment the color component
-            component += interval;
-
-            delay(1);
+        if (increasing) {
+            brightness += interval;
+            if (brightness > BRIGHTNESS) {increasing = false;}
+        } else {
+            brightness -= interval;
+            if (brightness <= 1) {
+                increasing = true;
+                count++;
+                }
         }
 
-        // Fade down
-        for (int j=0; j<(duration/2); j++) {
-            
-            // Set the LED color
-            CRGB color = CRGB((uint8_t)component, (uint8_t)component, (uint8_t)component);
-            ledController.setLEDColor(color);
-
-            // Decrement the color component
-            component -= interval;
-
-            delay(1);
-        }
+        // Wait 1 ms between cycles
+        delay(1);
     }
 
-    // Fade back up to move into the actual program
-        for (int j=0; j<(duration/2); j++) {
-            
-            // Set the LED color
-            CRGB color = CRGB((uint8_t)component, (uint8_t)component, (uint8_t)component);
-            ledController.setLEDColor(color);
-
-            // Increment the color component
-            component += interval;
-
+    // If the LED strip should end bright (vs. dark)
+    if (endBright) {       
+        
+        for (int i=0; i<duration/2; i++) {
+            ledController.setBrightness(brightness);
+            brightness += interval;
             delay(1);
         }
 
+    }
 }
 
 void Micro::microInit() {
 
+    // Set initial LED color and brightness
+    ledController.setLEDColor(CRGB::White);
+    ledController.setBrightness(0);
+
     // Fade LED strip up and down three times
-    fade(400, 2);
+    fade(400, 2, true, true);
 
 }
 

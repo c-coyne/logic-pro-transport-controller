@@ -21,9 +21,14 @@ classDiagram
         -Footswitch footswitch
         -LEDController ledController
         -int currentSwitch
-        +int checkFootswitch()
+        -State currentState
+        -void fade(int duration, int count, bool increasing, bool endBright)
+        +void microInit()
+        +void checkFootswitch()
     }
     class LEDController{
-
+        -CRGB leds[NUM_LEDS]
+        +void setBrightness(int brightness)
+        +void setLEDColor(CRGB color)
     }
 ```

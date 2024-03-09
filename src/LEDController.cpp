@@ -14,6 +14,7 @@ LEDController::~LEDController() {
 
 void LEDController::setBrightness(int brightness) {
     FastLED.setBrightness(brightness);
+    FastLED.show();
 }
 
 void LEDController::setLEDColor(CRGB color) {
