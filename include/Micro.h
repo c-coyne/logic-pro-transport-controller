@@ -3,11 +3,13 @@
 
 #include "Footswitch.h"
 #include "LEDController.h"
+#include "SerialCommunication.h"
 
 class Micro {
     private:
         Footswitch footSwitch;
         LEDController ledController;
+        SerialCommunication serialCommunication;
         int mainSwitch;
         State mainState;
     public:

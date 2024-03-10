@@ -5,6 +5,7 @@ classDiagram
     Footswitch o-- Switch
     Micro --> Footswitch
     Micro --> LEDController
+    Micro --> SerialCommunication
     class Switch{
         -int id
         -int pin
@@ -36,5 +37,8 @@ classDiagram
         +void fade(int duration, int count, bool increasing, bool endBright)
         +void internalFade()
         +void LEDControllerInit()
+    }
+    class SerialCommunication{
+        +void sendCommand(SwitchID id)
     }
 ```

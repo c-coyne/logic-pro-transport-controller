@@ -19,7 +19,7 @@ Footswitch::~Footswitch() {
     // deallocate resources if any
 }
 
-int Footswitch::checkSwitches() {
+SwitchID Footswitch::checkSwitches() {
     if (switch1.isPressed()) {return SWITCH_0;}
     if (switch2.isPressed()) {return SWITCH_1;}
     if (switch3.isPressed()) {return SWITCH_2;}

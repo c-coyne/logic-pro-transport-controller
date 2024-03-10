@@ -2,6 +2,7 @@
 #define FOOTSWITCH_H
 
 #include "Switch.h"
+#include "Cfg_Types.h"
 
 class Footswitch {
     private:
@@ -12,7 +13,7 @@ class Footswitch {
     public:
         Footswitch(int switchPins[4]);
         ~Footswitch();
-        int checkSwitches();
+        SwitchID checkSwitches();
 };
 
 #endif // FOOTSWITCH_H
