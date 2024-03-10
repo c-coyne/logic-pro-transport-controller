@@ -21,19 +21,20 @@ classDiagram
         -Footswitch footswitch
         -LEDController ledController
         -int mainSwitch
-        -float mainBrightness
-        -float mainInterval
         -State mainState
-        -CRGB mainColor
-        -void fade(int duration, int count, bool increasing, bool endBright)
-        -void internalFade()
         +void microInit()
         +void checkFootswitch()
         +void mainFunction()
     }
     class LEDController{
+        -float mainBrightness
+        -float mainInterval
+        -CRGB mainColor
         -CRGB leds[NUM_LEDS]
         +void setBrightness(int brightness)
         +void setLEDColor(CRGB color)
+        +void fade(int duration, int count, bool increasing, bool endBright)
+        +void internalFade()
+        +void LEDControllerInit()
     }
 ```

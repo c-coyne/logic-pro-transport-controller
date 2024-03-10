@@ -9,12 +9,7 @@ class Micro {
         Footswitch footSwitch;
         LEDController ledController;
         int mainSwitch;
-        float mainBrightness;
-        float mainInterval;
         State mainState;
-        CRGB mainColor;
-        void fade(int duration, int count, bool increasing, bool endBright);
-        void internalFade();
     public:
         Micro(int switchPins[4]);
         ~Micro();
