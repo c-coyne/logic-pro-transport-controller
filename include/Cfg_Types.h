@@ -11,9 +11,9 @@
 #define COLOR_ORDER         GRB
 #define UPDATES_PER_SECOND  100
 
-#define SWITCH0_COLOR       CRGB::Green
-#define SWITCH1_COLOR       CRGB::Blue
-#define SWITCH2_COLOR       CRGB::Yellow
+#define SWITCH0_COLOR       CRGB::Blue
+#define SWITCH1_COLOR       CRGB::Green
+#define SWITCH2_COLOR       CRGB::Orange
 #define SWITCH3_COLOR       CRGB::Red
 
 #define SWITCH0_PIN         2
