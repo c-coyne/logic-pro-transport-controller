@@ -3,6 +3,7 @@
  ****************************************************/
 #include "Micro.h"
 #include <Arduino.h>
+#include <Keyboard.h>
 
 Micro::Micro(int switchPins[4]) : footSwitch(switchPins) {
     mainSwitch = SwitchID::SWITCH_INIT;

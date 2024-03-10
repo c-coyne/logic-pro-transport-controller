@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <Keyboard.h>
 #include "Micro.h"
 #include "Cfg_Types.h"
 
