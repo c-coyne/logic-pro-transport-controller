@@ -12,7 +12,7 @@ SerialCommunication::~SerialCommunication() {
 }
 
 void SerialCommunication::sendCommand(SwitchID id) {
-    if (SERIAL_COMS) {
+    if (SERIAL_ENABLED) {
         switch(id) {
             case SWITCH_INIT:
                 break;
@@ -49,4 +49,6 @@ void SerialCommunication::sendCommand(SwitchID id) {
                 break;
         }
     } // if SERIAL_COMS == true
+    
+    return;
 }

@@ -26,7 +26,6 @@ void LEDController::internalFade() {
     setBrightness(mainBrightness);
 
     return;
-
 }
 
 void LEDController::fade(int duration, int n, bool increasing, bool endBright) {
@@ -69,6 +68,8 @@ void LEDController::fade(int duration, int n, bool increasing, bool endBright) {
             delay(1);
         }
     }
+
+    return;
 }
 
 void LEDController::LEDControllerInit() {
@@ -94,14 +95,19 @@ void LEDController::LEDControllerInit() {
         delay(1);
     }
 
+    return;
 }
 
 void LEDController::setBrightness(int brightness) {
     FastLED.setBrightness(brightness);
     FastLED.show();
+
+    return;
 }
 
 void LEDController::setLEDColor(CRGB color) {
     fill_solid( leds, NUM_LEDS, color);
     FastLED.show();
+
+    return;
 }

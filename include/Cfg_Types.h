@@ -42,14 +42,18 @@ enum SwitchID {
 };
 
 // SerialCommunication
-#define SERIAL_COMS         false    // Turn serial communication on/off
-#define SWITCH0_MACCMD      true    // Windows key pressed (example)
-#define SWITCH0_COMMAND     98      // b (example)
-#define SWITCH1_MACCMD      true    // Windows key pressed (example)
-#define SWITCH1_COMMAND     114     // r (example)
-#define SWITCH2_MACCMD      false   // Windows key not pressed (example)
-#define SWITCH2_COMMAND     50      // 2 (example)
-#define SWITCH3_MACCMD      false   // Windows key not pressed (example)
-#define SWITCH3_COMMAND     51      // 3 (example)
+#define SERIAL_ENABLED      false   // Turn serial communication on/off
+// START - Return key
+#define SWITCH0_MACCMD      false   // Mac Command key not pressed
+#define SWITCH0_COMMAND     36      // Return key
+// PLAY - space bar
+#define SWITCH1_MACCMD      false   // Mac Command key not pressed
+#define SWITCH1_COMMAND     32      // Space bar
+// STOP - space bar
+#define SWITCH2_MACCMD      false   // Mac Command key not pressed
+#define SWITCH2_COMMAND     32      // Space bar
+// RECORD - r
+#define SWITCH3_MACCMD      false   // Mac Command key not pressed
+#define SWITCH3_COMMAND     114     // r key
 
 #endif // CFG_TYPES_H
