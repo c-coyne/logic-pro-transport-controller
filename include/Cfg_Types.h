@@ -49,7 +49,7 @@ enum SwitchID {
 // SerialCommunication
 #define SERIAL_ENABLED          false   // Turn serial communication on/off
 #define REWIND_COMMAND          44      // REWIND: "," key
-#define START_COMMAND           36      // START: Return key
+#define START_COMMAND           176     // START: Return key
 #define FASTFORWARD_COMMAND     46      // FAST FORWARD: "." key
 #define PLAY_STOP_COMMAND       32      // PLAY / STOP: space bar
 #define RECORD_COMMAND          114     // RECORD: "r" key

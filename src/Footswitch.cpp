@@ -22,18 +22,23 @@ Footswitch::~Footswitch() {
 SwitchID Footswitch::checkSwitches() {
     if (switch0.isPressed()) {
         int count_ms = 0;
-        while (switch1.isPressed() && (count_ms < 1000)) {
+        while (switch0.isPressed() && (count_ms < 1000)) {
             count_ms++;
             delay(1);
         }
-        return (count_ms > 1000) ? SWITCH_0_LONG : SWITCH_0;
+        return (count_ms == 1000) ? SWITCH_0_LONG : SWITCH_0; // If Switch 0 pressed for more than 1 second, send long press
     }
-    if (switch1.isPressed()) { return SWITCH_1; }
+    if (switch1.isPressed()) { 
+        while (switch1.isPressed()) { delay(1); } // Send response on rising edge
+        return SWITCH_1;
+    }
     if (switch2.isPressed()) {
-        // int count_ms = 0;
-        while (switch2.isPressed()) { delay(1); }
+        while (switch2.isPressed()) { delay(1); } // Send response on rising edge
         return SWITCH_2;
     }
-    if (switch3.isPressed()) { return SWITCH_3; }
+    if (switch3.isPressed()) { 
+        while (switch3.isPressed()) { delay(1); } // Send response on rising edge
+        return SWITCH_3;
+    }
     return SWITCH_NONE;
 }

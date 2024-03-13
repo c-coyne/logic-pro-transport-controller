@@ -19,32 +19,27 @@ void SerialCommunication::sendCommand(SwitchID id) {
         case SWITCH_INIT:
             break;
         case SWITCH_0:
-            // Keyboard.press(REWIND_COMMAND);
-            Keyboard.press(48);
+            Keyboard.press(REWIND_COMMAND);
             delay(10);
             Keyboard.releaseAll();
             break;
         case SWITCH_0_LONG:
-            // Keyboard.press(START_COMMAND);
-            Keyboard.press(49);
+            Keyboard.press(START_COMMAND);
             delay(10);
             Keyboard.releaseAll();
             break;
         case SWITCH_1:
-            // Keyboard.press(FASTFORWARD_COMMAND);
-            Keyboard.press(50);
+            Keyboard.press(FASTFORWARD_COMMAND);
             delay(10);
             Keyboard.releaseAll();
             break;
         case SWITCH_2:
-            // Keyboard.press(PLAY_STOP_COMMAND);
-            Keyboard.press(51);
+            Keyboard.press(PLAY_STOP_COMMAND);
             delay(10);
             Keyboard.releaseAll();
             break;
         case SWITCH_3:
-            // Keyboard.press(RECORD_COMMAND);
-            Keyboard.press(52);
+            Keyboard.press(RECORD_COMMAND);
             delay(10);
             Keyboard.releaseAll();
             break;
