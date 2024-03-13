@@ -6,10 +6,10 @@
 
 class Footswitch {
     private:
+        Switch switch0;
         Switch switch1;
         Switch switch2;
         Switch switch3;
-        Switch switch4;
     public:
         Footswitch(int switchPins[4]);
         ~Footswitch();

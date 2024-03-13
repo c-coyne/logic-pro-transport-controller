@@ -31,7 +31,13 @@ void Micro::mainFunction() {
     switch(mainState) {
         case STATE_INIT:
             break;
+        case STATE_REWIND:
+            ledController.mainBrightness = BRIGHTNESS;
+            break;
         case STATE_START:
+            ledController.mainBrightness = BRIGHTNESS;
+            break;
+        case STATE_FASTFORWARD:
             ledController.mainBrightness = BRIGHTNESS;
             break;
         case STATE_PLAY:
@@ -56,38 +62,119 @@ void Micro::checkFootswitch() {
     SwitchID id = footSwitch.checkSwitches();
 
     // If a switch is pressed and is not the current state, handle it accordingly
-    if ((id != SWITCH_NONE) && (id != mainSwitch)) {
+    if (id != SWITCH_NONE) {
         mainSwitch = id; // Set the main variable to the new switch
         switch(mainSwitch) {
-            case SWITCH_0: // STATE_START
-                mainState = STATE_START;
-                ledController.setLEDColor(SWITCH0_COLOR);
-                ledController.setBrightness(BRIGHTNESS);
-                serialCommunication.sendCommand(id);
+
+            case SWITCH_0: // REWIND
+                switch (mainState) {
+                    case STATE_INIT:
+                    case STATE_REWIND:
+                    case STATE_FASTFORWARD:
+                    case STATE_STOP:
+                        mainState = STATE_REWIND;
+                        serialCommunication.sendCommand(id);
+                        ledController.setLEDColor(REWIND_COLOR);
+                        ledController.fade(300, 1, false, true);
+                        break;
+                    case STATE_START:
+                        break;
+                    case STATE_PLAY:
+                    case STATE_RECORD:
+                        serialCommunication.sendCommand(id);
+                        break;
+                    default:
+                        break;   
+                }
                 break;
-            case SWITCH_1: // STATE_PLAY
-                mainState = STATE_PLAY;
-                ledController.setLEDColor(SWITCH1_COLOR);
-                ledController.setBrightness(BRIGHTNESS);
-                serialCommunication.sendCommand(id);
+
+            case SWITCH_0_LONG: // START
+                switch (mainState) {
+                    case STATE_INIT:
+                    case STATE_REWIND:
+                    case STATE_FASTFORWARD:
+                    case STATE_STOP:
+                        mainState = STATE_START;
+                        serialCommunication.sendCommand(id);
+                        ledController.setLEDColor(START_COLOR);
+                        break;
+                    case STATE_START:
+                        break;
+                    case STATE_PLAY:
+                    case STATE_RECORD:
+                        break;
+                    default:
+                        break;
+                }
                 break;
-            case SWITCH_2: // STATE_STOP
-                mainState = STATE_STOP;
-                ledController.setLEDColor(SWITCH2_COLOR);
-                ledController.setBrightness(BRIGHTNESS);
-                serialCommunication.sendCommand(id);
+
+            case SWITCH_1: // FAST FORWARD
+                switch (mainState) {
+                    case STATE_INIT:
+                    case STATE_REWIND:
+                    case STATE_FASTFORWARD:
+                    case STATE_STOP:
+                    case STATE_START:
+                        mainState = STATE_FASTFORWARD;
+                        serialCommunication.sendCommand(id);
+                        ledController.setLEDColor(FASTFORWARD_COLOR);
+                        ledController.fade(300, 1, false, true);
+                        break;
+                    case STATE_PLAY:
+                    case STATE_RECORD:
+                        serialCommunication.sendCommand(id);
+                        break;
+                    default:
+                        break;
+                }
                 break;
-            case SWITCH_3: // STATE_RECORD
-                mainState = STATE_RECORD;
-                ledController.setLEDColor(SWITCH3_COLOR);
-                ledController.setBrightness(BRIGHTNESS);
-                serialCommunication.sendCommand(id);
+
+            case SWITCH_2: // PLAY / STOP
+                switch (mainState) {
+                    case STATE_INIT:
+                    case STATE_REWIND:
+                    case STATE_FASTFORWARD:
+                    case STATE_STOP:
+                    case STATE_START:
+                        mainState = STATE_PLAY;
+                        serialCommunication.sendCommand(id);
+                        ledController.setLEDColor(PLAY_COLOR);
+                        break;
+                    case STATE_PLAY:
+                    case STATE_RECORD:
+                        mainState = STATE_STOP;
+                        serialCommunication.sendCommand(id);
+                        ledController.setLEDColor(STOP_COLOR);
+                        break;
+                    default:
+                        break;
+                }
                 break;
+
+            case SWITCH_3: // RECORD
+                switch (mainState) {
+                    case STATE_INIT:
+                    case STATE_REWIND:
+                    case STATE_FASTFORWARD:
+                    case STATE_STOP:
+                    case STATE_START:
+                    case STATE_PLAY:
+                        mainState = STATE_RECORD;
+                        serialCommunication.sendCommand(id);
+                        ledController.setLEDColor(RECORD_COLOR);
+                        break;
+                    case STATE_RECORD:
+                    default:
+                        break;
+                }
+                break;
+            
             default:
-                ledController.setLEDColor(CRGB::White);
-                ledController.setBrightness(BRIGHTNESS);
                 break;
         }
+
+        ledController.setBrightness(BRIGHTNESS); // Regardless of state, set the brightness to BRIGHTNESS
+
     }
 
     return;

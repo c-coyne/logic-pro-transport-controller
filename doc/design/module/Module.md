@@ -12,10 +12,10 @@ classDiagram
         +bool isPressed()
     }
     class Footswitch{
+        -Switch switch0
         -Switch switch1
         -Switch switch2
         -Switch switch3
-        -Switch switch4
         +int checkSwitches()
     }
     class Micro{

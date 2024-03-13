@@ -61,12 +61,13 @@ void LEDController::fade(int duration, int n, bool increasing, bool endBright) {
 
     // If the LED strip should end bright (vs. dark)
     if (endBright) {       
-        
-        for (int i=0; i<duration/2; i++) {
+
+        while (brightness < BRIGHTNESS) {
             setBrightness(brightness);
             brightness += interval;
             delay(1);
         }
+
     }
 
     return;
