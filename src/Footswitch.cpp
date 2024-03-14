@@ -1,9 +1,25 @@
+/*=====================================================================================*\
+| Author:   Christopher Coyne                                         March 13th, 2024  |
+| --------------------------------------------------------------------------------------|
+| Date:     March 13th, 2024                                                            |
+| --------------------------------------------------------------------------------------|
+| MODULE:     [ Footswitch ]                                                            |
+| --------------------------------------------------------------------------------------|
+| DESCRIPTION:                                                                          |
+|    Footswitch class                                                                   |
+| --------------------------------------------------------------------------------------|
+\*=====================================================================================*/
+
 /****************************************************
  *  Include files                                   *
  ****************************************************/
 #include "Footswitch.h"
 #include "Cfg_Types.h"
 #include <Arduino.h>
+
+/****************************************************
+ *  Constructor / destructor                        *
+ ****************************************************/
 
 Footswitch::Footswitch(int switchPins[4])
            : switch0(0, switchPins[0]),
@@ -15,18 +31,22 @@ Footswitch::Footswitch(int switchPins[4])
     }
 }
 
-Footswitch::~Footswitch() {
-    // deallocate resources if any
-}
+Footswitch::~Footswitch() {}
+
+/****************************************************
+ *  Member functions                                *
+ ****************************************************/
 
 SwitchID Footswitch::checkSwitches() {
+
     if (switch0.isPressed()) {
         int count_ms = 0;
         while (switch0.isPressed() && (count_ms < 1000)) {
             count_ms++;
             delay(1);
         }
-        return (count_ms == 1000) ? SWITCH_0_LONG : SWITCH_0; // If Switch 0 pressed for more than 1 second, send long press
+        return (count_ms == 1000) ? SWITCH_0_LONG : SWITCH_0; // If Switch 0 pressed for more than 1 second, send long press 
+                                                              // on rising edge. Otherwise send normal press on rising edge
     }
     if (switch1.isPressed()) { 
         while (switch1.isPressed()) { delay(1); } // Send response on rising edge
@@ -40,5 +60,6 @@ SwitchID Footswitch::checkSwitches() {
         while (switch3.isPressed()) { delay(1); } // Send response on rising edge
         return SWITCH_3;
     }
+
     return SWITCH_NONE;
 }

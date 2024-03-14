@@ -1,16 +1,34 @@
+/*=====================================================================================*\
+| Author:   Christopher Coyne                                         March 13th, 2024  |
+| --------------------------------------------------------------------------------------|
+| MODULE:     [ LEDController ]                                                         |
+| --------------------------------------------------------------------------------------|
+| DESCRIPTION:                                                                          |
+|    LEDController class                                                                |
+| --------------------------------------------------------------------------------------|
+\*=====================================================================================*/
+
 /****************************************************
  *  Include files                                   *
  ****************************************************/
 #include "LEDController.h"
 
+/****************************************************
+ *  Constructor / destructor                        *
+ ****************************************************/
+
 LEDController::LEDController() {
-    FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
+
+    FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip ); // Add a clockless based CLEDController instance
     FastLED.setBrightness(BRIGHTNESS);
+
 }
 
-LEDController::~LEDController() {
-    // deallocate resources if any
-}
+LEDController::~LEDController() {}
+
+/****************************************************
+ *  Member functions                                *
+ ****************************************************/
 
 void LEDController::internalFade() {
 
@@ -30,7 +48,7 @@ void LEDController::internalFade() {
 
 void LEDController::fade(int duration, int n, bool increasing, bool endBright) {
 
-    // Set up interval and initial color component, initialize fade count
+    // Set up interval and initial brightness, initialize fade count
     float interval = float(BRIGHTNESS) / (duration / 2.);
     float brightness = (increasing) ? 0. : float(BRIGHTNESS);
     int count = 0;
@@ -55,8 +73,7 @@ void LEDController::fade(int duration, int n, bool increasing, bool endBright) {
                 }
         }
 
-        // Wait 1 ms between cycles
-        delay(1);
+        delay(1); // Wait 1 ms between cycles
     }
 
     // If the LED strip should end bright (vs. dark)
@@ -84,13 +101,13 @@ void LEDController::LEDControllerInit() {
     setBrightness(0);
     setLEDColor(mainColor);
 
-    // Fade LED strip up and down two times as init sequence
+    // Fade LED strip up and down two times as an init sequence
     fade(300, 2, true, false);
 
     // Fade LEDs up to BRIGHTNESS to indicate device is ready
-    float interval = float(BRIGHTNESS) / 2000.;
+    float interval = float(BRIGHTNESS) / 1000.;
     float brightness = 0;
-    for (int i=0; i<2001; i++) {
+    for (int i=0; i<1001; i++) {
         setBrightness(brightness);
         brightness += interval;
         delay(1);
@@ -100,6 +117,7 @@ void LEDController::LEDControllerInit() {
 }
 
 void LEDController::setBrightness(int brightness) {
+
     FastLED.setBrightness(brightness);
     FastLED.show();
 
@@ -107,6 +125,7 @@ void LEDController::setBrightness(int brightness) {
 }
 
 void LEDController::setLEDColor(CRGB color) {
+
     fill_solid( leds, NUM_LEDS, color);
     FastLED.show();
 

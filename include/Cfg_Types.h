@@ -1,30 +1,59 @@
+/*=====================================================================================*\
+| Author:   Christopher Coyne                                         March 13th, 2024  |
+| --------------------------------------------------------------------------------------|
+| MODULE:     **Configuration**                                                         |
+| --------------------------------------------------------------------------------------|
+| DESCRIPTION:                                                                          |
+|    All project configuration done in this file                                        |
+| --------------------------------------------------------------------------------------|
+\*=====================================================================================*/
+
 #ifndef CFG_TYPES_H
 #define CFG_TYPES_H
 
 /****************************************************
- *  Local defines                                   *
+ *  Defines                                         *
  ****************************************************/
-// LEDController
+
+//----------------- LEDController -----------------//
+// Setup
 #define LED_PIN                 6
 #define NUM_LEDS                58
 #define BRIGHTNESS              128
 #define LED_TYPE                WS2811
 #define COLOR_ORDER             GRB
 #define UPDATES_PER_SECOND      100
+// State colors
+#define REWIND_COLOR            CRGB::Indigo    // [FR_002]
+#define START_COLOR             CRGB::Indigo    // [FR_006]
+#define FASTFORWARD_COLOR       CRGB::Indigo    // [FR_009]
+#define PLAY_COLOR              CRGB::Green     // [FR_013]
+#define STOP_COLOR              CRGB::Orange    // [FR_013]
+#define RECORD_COLOR            CRGB::Red       // [FR_017]
 
-#define REWIND_COLOR            CRGB::Indigo
-#define START_COLOR             CRGB::Indigo
-#define FASTFORWARD_COLOR       CRGB::Indigo
-#define PLAY_COLOR              CRGB::Green
-#define STOP_COLOR              CRGB::Orange
-#define RECORD_COLOR            CRGB::Red
-
+//------------------ Footswitch -------------------//
+// Arduino Micro pins
 #define SWITCH0_PIN             2
 #define SWITCH1_PIN             3
 #define SWITCH2_PIN             4
 #define SWITCH3_PIN             5
 
-// Micro
+//-------------- SerialCommunication --------------//
+// Serial commands
+// #define SERIAL_ENABLED                  // Turn serial communication on/off
+                                        // ASCII:       DEC   HEX   OCT   CHR
+                                        // ------------------------------------------
+#define REWIND_COMMAND          44      // REWIND       44    2C    054   "," key           // [FR_004]
+#define START_COMMAND           176     // START        176   B0    260   Return key        // [FR_005]
+#define FASTFORWARD_COMMAND     46      // FAST FORWARD 46    2E    056   "." key           // [FR_011]
+#define PLAY_STOP_COMMAND       32      // PLAY / STOP  32    20    040   space bar         // [FR_015]
+#define RECORD_COMMAND          114     // RECORD       114   72    162   "r" key           // [FR_019]
+
+/****************************************************
+ *  Structs & enums                                 *
+ ****************************************************/
+
+//--------------------- Micro ---------------------//
 enum State {
     STATE_INIT,
     STATE_REWIND,
@@ -36,6 +65,7 @@ enum State {
     STATE_ERR
 };
 
+//------------------ Footswitch -------------------//
 enum SwitchID {
     SWITCH_INIT,
     SWITCH_0,
@@ -45,13 +75,5 @@ enum SwitchID {
     SWITCH_3,
     SWITCH_NONE
 };
-
-// SerialCommunication
-#define SERIAL_ENABLED          false   // Turn serial communication on/off
-#define REWIND_COMMAND          44      // REWIND: "," key
-#define START_COMMAND           176     // START: Return key
-#define FASTFORWARD_COMMAND     46      // FAST FORWARD: "." key
-#define PLAY_STOP_COMMAND       32      // PLAY / STOP: space bar
-#define RECORD_COMMAND          114     // RECORD: "r" key
 
 #endif // CFG_TYPES_H

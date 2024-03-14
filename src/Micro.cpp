@@ -1,3 +1,13 @@
+/*=====================================================================================*\
+| Author:   Christopher Coyne                                         March 13th, 2024  |
+| --------------------------------------------------------------------------------------|
+| MODULE:     [ Micro ]                                                                 |
+| --------------------------------------------------------------------------------------|
+| DESCRIPTION:                                                                          |
+|    Micro class                                                                        |
+| --------------------------------------------------------------------------------------|
+\*=====================================================================================*/
+
 /****************************************************
  *  Include files                                   *
  ****************************************************/
@@ -5,22 +15,22 @@
 #include <Arduino.h>
 #include <Keyboard.h>
 
-Micro::Micro(int switchPins[4]) : footSwitch(switchPins) {
-    mainSwitch = SwitchID::SWITCH_INIT;
-    mainState = State::STATE_INIT;
-}
+/****************************************************
+ *  Constructor / destructor                        *
+ ****************************************************/
 
-Micro::~Micro() {
-    // deallocate resources if any
-}
+Micro::Micro(int switchPins[4]) : footSwitch(switchPins) { mainState = State::STATE_INIT; }
+
+Micro::~Micro() {}
+
+/****************************************************
+ *  Member functions                                *
+ ****************************************************/
 
 void Micro::microInit() {
 
-    // Initialize state machine
-    mainState = STATE_INIT;
-    
-    // Initialize LED string
-    ledController.LEDControllerInit();
+    mainState = STATE_INIT; // Initialize state machine
+    ledController.LEDControllerInit(); // Initialize LEDController object
 
     return;
 }
@@ -35,19 +45,19 @@ void Micro::mainFunction() {
             ledController.mainBrightness = BRIGHTNESS;
             break;
         case STATE_START:
-            ledController.mainBrightness = BRIGHTNESS;
+            ledController.mainBrightness = BRIGHTNESS; // [FR_007]
             break;
         case STATE_FASTFORWARD:
             ledController.mainBrightness = BRIGHTNESS;
             break;
         case STATE_PLAY:
-            ledController.internalFade();
+            ledController.internalFade(); // [FR_014]
             break;
         case STATE_STOP:
             ledController.mainBrightness = BRIGHTNESS;
             break;
         case STATE_RECORD:
-            ledController.internalFade();
+            ledController.internalFade(); // [FR_018]
             break;
         default:
             break;
@@ -63,8 +73,8 @@ void Micro::checkFootswitch() {
 
     // If a switch is pressed and is not the current state, handle it accordingly
     if (id != SWITCH_NONE) {
-        mainSwitch = id; // Set the main variable to the new switch
-        switch(mainSwitch) {
+
+        switch(id) {
 
             case SWITCH_0: // REWIND
                 switch (mainState) {
@@ -74,14 +84,14 @@ void Micro::checkFootswitch() {
                     case STATE_STOP:
                         mainState = STATE_REWIND;
                         serialCommunication.sendCommand(id);
-                        ledController.setLEDColor(REWIND_COLOR);
-                        ledController.fade(300, 1, false, true);
+                        ledController.setLEDColor(REWIND_COLOR); // [FR_002]
+                        ledController.fade(300, 1, false, true); // [FR_003]
                         break;
                     case STATE_START:
                         break;
                     case STATE_PLAY:
                     case STATE_RECORD:
-                        serialCommunication.sendCommand(id);
+                        serialCommunication.sendCommand(id); // [FR_004]
                         break;
                     default:
                         break;   
@@ -95,8 +105,8 @@ void Micro::checkFootswitch() {
                     case STATE_FASTFORWARD:
                     case STATE_STOP:
                         mainState = STATE_START;
-                        serialCommunication.sendCommand(id);
-                        ledController.setLEDColor(START_COLOR);
+                        serialCommunication.sendCommand(id);    // [FR_005]
+                        ledController.setLEDColor(START_COLOR); // [FR_006, FR_007]
                         break;
                     case STATE_START:
                         break;
@@ -116,9 +126,9 @@ void Micro::checkFootswitch() {
                     case STATE_STOP:
                     case STATE_START:
                         mainState = STATE_FASTFORWARD;
-                        serialCommunication.sendCommand(id);
-                        ledController.setLEDColor(FASTFORWARD_COLOR);
-                        ledController.fade(300, 1, false, true);
+                        serialCommunication.sendCommand(id); // [FR_011]
+                        ledController.setLEDColor(FASTFORWARD_COLOR); // [FR_009]
+                        ledController.fade(300, 1, false, true); // [FR_010]
                         break;
                     case STATE_PLAY:
                     case STATE_RECORD:
@@ -137,14 +147,14 @@ void Micro::checkFootswitch() {
                     case STATE_STOP:
                     case STATE_START:
                         mainState = STATE_PLAY;
-                        serialCommunication.sendCommand(id);
-                        ledController.setLEDColor(PLAY_COLOR);
+                        serialCommunication.sendCommand(id); // [FR_015]
+                        ledController.setLEDColor(PLAY_COLOR); // [FR_013]
                         break;
                     case STATE_PLAY:
                     case STATE_RECORD:
                         mainState = STATE_STOP;
                         serialCommunication.sendCommand(id);
-                        ledController.setLEDColor(STOP_COLOR);
+                        ledController.setLEDColor(STOP_COLOR); // [FR_013]
                         break;
                     default:
                         break;
@@ -161,7 +171,7 @@ void Micro::checkFootswitch() {
                     case STATE_PLAY:
                         mainState = STATE_RECORD;
                         serialCommunication.sendCommand(id);
-                        ledController.setLEDColor(RECORD_COLOR);
+                        ledController.setLEDColor(RECORD_COLOR); // [FR_017]
                         break;
                     case STATE_RECORD:
                     default:

@@ -1,19 +1,33 @@
+/*=====================================================================================*\
+| Author:   Christopher Coyne                                         March 13th, 2024  |
+| --------------------------------------------------------------------------------------|
+| MODULE:     [ SerialCommunication ]                                                   |
+| --------------------------------------------------------------------------------------|
+| DESCRIPTION:                                                                          |
+|    SerialCommunication class                                                          |
+| --------------------------------------------------------------------------------------|
+\*=====================================================================================*/
+
 /****************************************************
  *  Include files                                   *
  ****************************************************/
 #include "SerialCommunication.h"
 
-SerialCommunication::SerialCommunication() {
-    // additional initialization if required
-}
+/****************************************************
+ *  Constructor / destructor                        *
+ ****************************************************/
 
-SerialCommunication::~SerialCommunication() {
-    // deallocate resources if any
-}
+SerialCommunication::SerialCommunication() {}
+
+SerialCommunication::~SerialCommunication() {}
+
+/****************************************************
+ *  Member functions                                *
+ ****************************************************/
 
 void SerialCommunication::sendCommand(SwitchID id) {
 
-    #ifdef SERIAL_ENABLED
+#ifdef SERIAL_ENABLED
     
     switch(id) {
         case SWITCH_INIT:
@@ -47,7 +61,7 @@ void SerialCommunication::sendCommand(SwitchID id) {
             break;
     }
 
-    #endif // SERIAL_ENABLED
+#endif // SERIAL_ENABLED
 
     return;
 }

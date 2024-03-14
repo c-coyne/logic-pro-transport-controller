@@ -21,7 +21,6 @@ classDiagram
     class Micro{
         -Footswitch footswitch
         -LEDController ledController
-        -int mainSwitch
         -State mainState
         +void microInit()
         +void checkFootswitch()
