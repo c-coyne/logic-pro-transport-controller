@@ -17,7 +17,7 @@
 
 //----------------- LEDController -----------------//
 // Setup
-#define LED_PIN                 6
+#define LED_PIN                 4
 #define NUM_LEDS                58
 #define BRIGHTNESS              128
 #define LED_TYPE                WS2811
@@ -33,10 +33,10 @@
 
 //------------------ Footswitch -------------------//
 // Arduino Micro pins
-#define SWITCH0_PIN             2
-#define SWITCH1_PIN             3
-#define SWITCH2_PIN             4
-#define SWITCH3_PIN             5
+#define SWITCH0_PIN             9
+#define SWITCH1_PIN             10
+#define SWITCH2_PIN             11
+#define SWITCH3_PIN             12
 
 //-------------- SerialCommunication --------------//
 // Serial commands
