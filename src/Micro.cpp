@@ -19,7 +19,7 @@
  *  Constructor / destructor                        *
  ****************************************************/
 
-Micro::Micro(int switchPins[4]) : footSwitch(switchPins) { mainState = State::STATE_INIT; }
+Micro::Micro(int switchPins[4]) : footSwitch(switchPins) {}
 
 Micro::~Micro() {}
 

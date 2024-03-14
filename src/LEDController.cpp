@@ -94,12 +94,11 @@ void LEDController::LEDControllerInit() {
 
     // Initialize main variables
     mainBrightness = BRIGHTNESS;
-    mainInterval = BRIGHTNESS / 500.;
-    mainColor = CRGB::White;
+    mainInterval = BRIGHTNESS / (0.5 * FADE_DURATION);
 
     // Set initial LED brightness and color
     setBrightness(0);
-    setLEDColor(mainColor);
+    setLEDColor(INIT_COLOR);
 
     // Fade LED strip up and down two times as an init sequence
     fade(300, 2, true, false);

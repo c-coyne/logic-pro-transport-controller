@@ -25,7 +25,6 @@ class LEDController {
     private:
         CRGB leds[NUM_LEDS];
         float mainInterval;
-        CRGB mainColor;
     public:
         float mainBrightness;
         LEDController();

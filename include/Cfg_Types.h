@@ -24,12 +24,15 @@
 #define COLOR_ORDER             GRB
 #define UPDATES_PER_SECOND      100
 // State colors
+#define INIT_COLOR              CRGB::White
 #define REWIND_COLOR            CRGB::Indigo    // [FR_002]
 #define START_COLOR             CRGB::Indigo    // [FR_006]
 #define FASTFORWARD_COLOR       CRGB::Indigo    // [FR_009]
 #define PLAY_COLOR              CRGB::Green     // [FR_013]
 #define STOP_COLOR              CRGB::Orange    // [FR_013]
 #define RECORD_COLOR            CRGB::Red       // [FR_017]
+// Fade
+#define FADE_DURATION           1000            // total cycle time in ms
 
 //------------------ Footswitch -------------------//
 // Arduino Micro pins
