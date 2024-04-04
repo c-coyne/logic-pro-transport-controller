@@ -17,7 +17,7 @@
 
 //----------------- LEDController -----------------//
 // Setup
-#define LED_PIN                 4
+#define LED_PIN                 6
 #define NUM_LEDS                58
 #define BRIGHTNESS              128
 #define LED_TYPE                WS2811
@@ -43,14 +43,14 @@
 
 //-------------- SerialCommunication --------------//
 // Serial commands
-// #define SERIAL_ENABLED                  // Turn serial communication on/off
+#define SERIAL_ENABLED                  // Turn serial communication on/off
                                         // ASCII:       DEC   HEX   OCT   CHR
                                         // ------------------------------------------
-#define REWIND_COMMAND          44      // REWIND       44    2C    054   "," key           // [FR_004]
-#define START_COMMAND           176     // START        176   B0    260   Return key        // [FR_005]
-#define FASTFORWARD_COMMAND     46      // FAST FORWARD 46    2E    056   "." key           // [FR_011]
-#define PLAY_STOP_COMMAND       32      // PLAY / STOP  32    20    040   space bar         // [FR_015]
-#define RECORD_COMMAND          114     // RECORD       114   72    162   "r" key           // [FR_019]
+#define REWIND_COMMAND          44      // REWIND       44    2C    054   "," key           [FR_004]
+#define START_COMMAND           176     // START        176   B0    260   Return key        [FR_005]
+#define FASTFORWARD_COMMAND     46      // FAST FORWARD 46    2E    056   "." key           [FR_011]
+#define PLAY_STOP_COMMAND       32      // PLAY / STOP  32    20    040   space bar         [FR_015]
+#define RECORD_COMMAND          114     // RECORD       114   72    162   "r" key           [FR_019]
 
 /****************************************************
  *  Structs & enums                                 *
