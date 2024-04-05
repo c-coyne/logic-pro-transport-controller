@@ -107,18 +107,20 @@ Below is an illustration of the file structure used in this project.
 
 | No | Directory                | File                                  | Details
 |----|--------------------------|---------------------------------------|---------------------------------------------------------------
-| 1  | doc/architecture         | /SystemElectricalSchematic.kicad_sch  | Electrical schematic for the project
-| 2  | doc/design/module        | /*.md                                 | Detailed design documents for each module
-| 3  | doc/design/module        | /Module.md                            | Class diagram
-| 4  | doc/design/system        | /SequenceDiagram.md                   | Sequence diagram
-| 5  | doc/design/system        | /StateDiagram.md                      | State diagram
-| 6  | doc/design/requirements  | /Requirements.md                      | Functional and non-functional requirements for the project
-| 7  | include                  | /*.h                                  | Class declaration
-| 8  | include                  | /Cfg_Types.h                          | Configuration file, all configuration is done here
-| 9  | src                      | /*.cpp                                | Class definition
-| 10 | src                      | /main.cpp                             | Main program
-| 11 | test                     | /test_main.cpp                        | Main test file, only dummy tests at the moment
-| 12 | .                        | /platformio.ini                       | PlatformIO Project Configuration File
+| 1  | cad                      | /*.FCStd                              | FreeCAD files
+| 2  | cad                      | /*.stl                                | Stereolithography files for 3D printing (sliced with Cura or similar)
+| 3  | doc/architecture         | /SystemElectricalSchematic.kicad_sch  | Electrical schematic for the project
+| 4  | doc/design/module        | /*.md                                 | Detailed design documents for each module
+| 5  | doc/design/module        | /Module.md                            | Class diagram
+| 6  | doc/design/system        | /SequenceDiagram.md                   | Sequence diagram
+| 7  | doc/design/system        | /StateDiagram.md                      | State diagram
+| 8  | doc/design/requirements  | /Requirements.md                      | Functional and non-functional requirements for the project
+| 9  | include                  | /*.h                                  | Class declaration
+| 10 | include                  | /Cfg_Types.h                          | Configuration file, all configuration is done here
+| 11 | src                      | /*.cpp                                | Class definition
+| 12 | src                      | /main.cpp                             | Main program
+| 13 | test                     | /test_main.cpp                        | Main test file, only dummy tests at the moment
+| 14 | .                        | /platformio.ini                       | PlatformIO Project Configuration File
 
 ### 4.3 :hammer: Build
 1. **Clone the Repository**
@@ -168,7 +170,9 @@ The bill of materials is listed below. Note that I've listed the prices as if ea
 The circuit for this project is very simple, and most of the circuit is already provided by the production Fender footswitch. The footswitch uses a 5-pin DIN connector for MIDI connection, where each pushbutton switch on the footswitch pulls the respective line to ground. The circuit board inside the footswitch makes each of the DPDT switch terminals easily accessible, which facilitated additional solder connections to the Arduino Micro. Therefore, assembling the electrical aspects of the project was straightforward, but feel free to check out the [schematic](doc/architecture/SystemElectricalSchematic.kicad_sch) for more details.
 
 ## 7. :computer: CAD Drawings / 3D Models
-The STL files used in this project are available here [TODO]. These files fit the vintage model of the Fender 4-button footswitch and were specifically designed to accommodate the thickness of my resulting epoxy pad underneath the footswitch. If you want to build this project and your epoxy pad isn't ~0.3", you'll need to adjust the design slightly.
+The STL files used in this project are available in the _cad_ directory. These files fit the vintage model of the Fender 4-button footswitch and were specifically designed to accommodate the thickness of my resulting epoxy pad underneath the footswitch. If you want to build this project and your epoxy pad isn't ~0.3", you'll need to adjust the design slightly.
+
+I've included both the STL files (to facilitate 3D printing) as well as the FreeCAD files for modification of the design. Note that the left end cover was born out of the right end cover, so the final step should be mirroring the main body about the XZ plane.
 
 ## 8. :notebook: Notes
 There really is no limit to how this project might be extended, and below are a few ideas if time permitted:
@@ -179,7 +183,28 @@ There really is no limit to how this project might be extended, and below are a 
 - a GUI for configuration
 
 ## 9. :camera: Gallery
-Pictures of your project.
+
+<p float="left">
+    <img src="/img/001.jpg" width="655" />
+    <img src="/img/002.jpg" width="725" />
+</p>
+<p float="left">
+    <img src="/img/003.jpg" width="377" />
+    <img src="/img/005.jpg" width="1003" />
+</p>
+<p float="left">
+    <img src="/img/006.jpg" width="932" />
+    <img src="/img/004.jpg" width="448" />
+</p>
+<p float="left">
+    <img src="/img/007.jpg" width="393" />
+    <img src="/img/008.jpg" width="987" />
+</p>
+<p float="left">
+    <img src="/img/010.jpg" width="211" />
+    <img src="/img/009.jpg" width="629" />
+    <img src="/img/011.jpg" width="535" />
+</p>
 
 ## 10. :books: Credit / Acknowledgment
 
@@ -189,7 +214,7 @@ Pictures of your project.
 
 ## 11. :e-mail: Contact
 
-Christopher Coyne: christopher.w.coyne@gmail.com
+Christopher Coyne: christopher.w.coyne@gmail.com  
 Project Link: https://github.com/c-coyne/logic-pro-transport-controller
 
 ## 12. :scroll: License
