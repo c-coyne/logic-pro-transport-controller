@@ -64,6 +64,11 @@ Below is an illustration of the file structure used in this project.
 
 ```
 .
+├── cad
+│   ├── LeftEndCover.FCStd
+│   ├── LeftEndCover.stl
+│   ├── RightEndCover.FCStd
+│   ├── RightEndCover.stl
 ├── doc
 │   ├── architecture
 │   │   └── SystemElectricalSchematic.kicad_sch
