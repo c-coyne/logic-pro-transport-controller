@@ -58,10 +58,15 @@ Configuration for this project is done exclusively in [Cfg_Types.h](include/Cfg_
 While everything here can be configured and adjusted, the default setup is shown below.
 
 **Type of LED:** `WS2811`
+
 **Number of LEDs:** `58`
+
 **Brightness:** `128`
+
 **LED color order:** `GRB`
+
 **Colors used:** `init = white`, `rewind = indigo`, `start = indigo`, `fastfoward = indigo`, `play = green`, `stop = yellow / orange`, `record = red`
+
 **Fade frequency**: `1 Hz`
 
 The instructions below explain how to use the footswitch to control Logic Pro.
