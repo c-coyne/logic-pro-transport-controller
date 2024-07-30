@@ -22,6 +22,13 @@ The Logic Pro transport controller detailed here is a simple addition to a vinta
   - [1. :notes: Project Description](#1-notes-project-description)
   - [2. :mag: Table of Contents](#2-mag-table-of-contents)
   - [3. :beginner: Usage](#3-beginner-usage)
+    - [3.1 :1234: Startup sequence](#31-1234-startup-sequence)
+    - [3.2 :rewind: Rewind](#32-rewind-rewind)
+    - [3.3 :fast_forward: Fastforward](#33-fast_forward-fastforward)
+    - [3.4 :end: Back to beginning](#34-end-back-to-beginning)
+    - [3.5 :arrow_forward: Play](#35-arrow_forward-play)
+    - [3.6 :red_circle: Record](#36-red_circle-record)
+    - [3.7 :triangular_flag_on_post: Stop](#37-triangular_flag_on_post-stop)
   - [4. :wrench: Development](#4-wrench-development)
     - [4.1 :clipboard: Development Environment](#41-clipboard-development-environment)
     - [4.2 :construction: File Structure](#42-construction-file-structure)
@@ -48,10 +55,61 @@ Configuration for this project is done exclusively in [Cfg_Types.h](include/Cfg_
 - Turn on / off keyboard emulation (for debugging)
 - Commands sent by each switch on the footswitch
 
-While everything here can be configured and adjusted, the default setup is shown below. [TODO]
+While everything here can be configured and adjusted, the default setup is shown below.
 
+**Type of LED:** `WS2811`
+**Number of LEDs:** `58`
+**Brightness:** `128`
+**LED color order:** `GRB`
+**Colors used:** `init = white`, `rewind = indigo`, `start = indigo`, `fastfoward = indigo`, `play = green`, `stop = yellow / orange`, `record = red`
+**Fade frequency**: `1 Hz`
 
-Therefore... [TODO] explain how to use the footswitch to control Logic Pro
+The instructions below explain how to use the footswitch to control Logic Pro.
+
+<p align="center">
+  <img src="img/Controls.png" />
+</p>
+
+### 3.1 :1234: Startup sequence
+When the transport controller is first connected to power, it will go through an LED sequence to indicate initialization. This is currently configured for a few LED pulses followed by a gradual fade to brightness, but this is fully configurable.
+
+<p align="center">
+  <img src="img/StartupSequence.gif" />
+</p>
+
+### 3.2 :rewind: Rewind
+The first button moves the playhead back one measure. This will be momentarily acknowledged by one fade cycle of the LEDs.
+
+### 3.3 :fast_forward: Fastforward
+The second button moves the playhead forward one measure. This will be momentarily acknowledged by one fade cycle of the LEDs.
+
+<p align="center">
+  <img src="img/BackwardForward.gif" />
+</p>
+
+### 3.4 :end: Back to beginning
+Holding the first button moves the playhead back to the beginning of the track. This will be momentarily acknowledged by one fade cycle of the LEDs.
+
+<p align="center">
+  <img src="img/BackToBeginning.gif" />
+</p>
+
+### 3.5 :arrow_forward: Play
+The third button toggles between play / stop. If the track is currently in the stopped state, pressing the third button will cause the track to play. This will be reflected via a cyclical fading green pattern in the LEDs, which continues as long as the track is still playing.
+
+<p align="center">
+  <img src="img/PlayStop.gif" />
+</p>
+
+### 3.6 :red_circle: Record
+The fourth button starts the track recording. If the track is currently in the stopped state, pressing the fourth button will cause the track to play and start recording. If the track is already playing, this will turn on the recording. Recording will be reflected via a cyclical fading red pattern in the LEDs, which continues as long as the track is still recording.
+
+<p align="center">
+  <img src="img/RecordStop.gif" />
+</p>
+
+### 3.7 :triangular_flag_on_post: Stop
+The third button is used to stop the track when in either the playing or recording state. The stopped state will be acknowledged by yellow / orange LEDs.
 
 ## 4. :wrench: Development
 The sections below discuss the setup of the project, necessary installations, and how to build and flash the project.
